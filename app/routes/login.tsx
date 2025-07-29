@@ -30,9 +30,10 @@ export async function action({request} : Route.ActionArgs) {
 
   const result = await response.json();
   // If success, store token and user to the session
+  console.log(result);
 
   session.set('userId', result.user.id);
-  session.set('username', result.user.username);
+  session.set('username', result.user.name);
   session.set('token', result.token);
 
   // Login succeeded, send them to the home page.
