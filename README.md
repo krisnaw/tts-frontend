@@ -1,6 +1,6 @@
 TODO
 - [✅] Deploy
-- [] Add Shadcn UI
+- [✅] Add Shadcn UI
 - [] Create Login page
 - [] Create Register page
 
