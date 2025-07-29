@@ -2,7 +2,8 @@ import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 import {getSession} from "~/sessions.server";
 import {Button} from "~/components/ui/button";
-import {Form} from "react-router";
+import {Form, redirect} from "react-router";
+import LogoutRoute from "~/routes/logout";
 
 
 export function meta({}: Route.MetaArgs) {
@@ -18,6 +19,10 @@ export async function loader({ context, request }: Route.LoaderArgs) {
       request.headers.get("Cookie"),
   );
 
+  // if it doesn't have a token, redirect to log in
+  if (!session.has("token")) {
+    return redirect("/login");
+  }
 
   return {  username: session.get('username') };
 }
@@ -28,11 +33,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <div>
         Hello, {username}
 
-        <div>
-          <Form>
-            <Button>Logout</Button>
-          </Form>
-        </div>
+        <LogoutRoute />
       </div>
   )
 }
