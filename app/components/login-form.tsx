@@ -24,13 +24,15 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <div>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
+                  name="email"
+                  value="krisna@mail.com"
                   placeholder="m@example.com"
                   required
                 />
@@ -45,7 +47,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" name="password" value="qwerty57" required />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full">
@@ -59,7 +61,7 @@ export function LoginForm({
                 Sign up
               </a>
             </div>
-          </form>
+          </div>
         </CardContent>
       </Card>
     </div>
