@@ -1,3 +1,10 @@
+TODO
+- [✅] Deploy
+- [] Add Shadcn UI
+- [] Create Login page
+- [] Create Register page
+
+
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.
