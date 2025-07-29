@@ -4,6 +4,7 @@ import {getSession} from "~/sessions.server";
 import {Button} from "~/components/ui/button";
 import {Form, redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
+import CreateRecord from "~/routes/create-record";
 
 
 export function meta({}: Route.MetaArgs) {
@@ -32,6 +33,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
       <div>
         Hello, {username}
+
+        <CreateRecord />
 
         <LogoutRoute />
       </div>

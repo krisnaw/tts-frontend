@@ -3,8 +3,9 @@ import {
   destroySession,
 } from "~/sessions.server";
 import type { Route } from "./+types/logout";
-import {Form, redirect} from "react-router";
+import {Form, redirect, useNavigation} from "react-router";
 import {Button} from "~/components/ui/button";
+import {Loader2} from "lucide-react";
 
 export async function action({request}: Route.ActionArgs) {
   const session = await getSession(
@@ -18,10 +19,15 @@ export async function action({request}: Route.ActionArgs) {
 }
 
 export default function LogoutRoute() {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   return (
       <>
         <Form method="post">
-          <Button>Logout</Button>
+          <Button disabled={isSubmitting} type="submit">
+            Logout
+            {isSubmitting &&  <Loader2 className="animate-spin" />}
+          </Button>
         </Form>
       </>
   );

@@ -1,5 +1,5 @@
 import { LoginForm } from "~/components/login-form"
-import {Form, redirect} from "react-router";
+import {Form, redirect, useNavigation} from "react-router";
 import type { Route } from "./+types/login";
 import {commitSession, getSession} from "~/sessions.server";
 
@@ -44,6 +44,7 @@ export async function action({request} : Route.ActionArgs) {
 }
 
 export default function Page() {
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
