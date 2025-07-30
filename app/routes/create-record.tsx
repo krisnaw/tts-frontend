@@ -40,7 +40,7 @@ export async function action({request}: Route.ActionArgs) {
       pitch: formData.get("pitch") as string,
       volume: formData.get("volume") as string,
       rate: formData.get("rate") as string,
-      voice: "10",
+      voice: formData.get("voice") as string,
     })
   })
 

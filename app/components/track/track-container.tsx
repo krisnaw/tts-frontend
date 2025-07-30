@@ -1,8 +1,9 @@
 import type {RecordType} from "~/lib/types";
 import {Button} from "~/components/ui/button";
-import {PlayIcon, TrashIcon} from "lucide-react";
+import {Activity, AudioLines, FileAudio, Gauge, PlayIcon, TrashIcon, Volume2, VolumeIcon} from "lucide-react";
 import {format} from "date-fns";
 import {Form} from "react-router";
+import {TooltipShell} from "~/components/tooltip-shell";
 
 export function TrackContainer({records}: { records: RecordType[] }) {
   return (
@@ -153,6 +154,38 @@ export function TrackContainer({records}: { records: RecordType[] }) {
 
                           <div className="text-muted-foreground order-first">
                             {format(new Date(record.createdAt), 'PPpp')}
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4 mt-4">
+                            <TooltipShell content="Voice">
+                              <div className="text-muted-foreground flex gap-x-2.5">
+                                <FileAudio />
+                                {record.voice}
+                              </div>
+                            </TooltipShell>
+
+                            <TooltipShell content="Volume">
+                              <div className="text-muted-foreground flex gap-x-2.5">
+                                <Volume2 />
+                                {record.volume}
+                              </div>
+                            </TooltipShell>
+
+                            <TooltipShell content="Rate">
+                              <div className="text-muted-foreground flex gap-x-2.5">
+                                <Gauge />
+                                {record.rate}
+                              </div>
+                            </TooltipShell>
+
+                            <TooltipShell content="Pitch">
+                              <div className="text-muted-foreground flex gap-x-2.5">
+                                <AudioLines />
+                                {record.pitch}
+                              </div>
+                            </TooltipShell>
+
+
                           </div>
 
                           <div className="mt-4 w-full flex justify-between">
