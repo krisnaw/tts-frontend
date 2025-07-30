@@ -4,8 +4,7 @@ import {Form, redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
 import {jwtDecode} from "jwt-decode";
-import {Button} from "~/components/ui/button";
-import {RecordContainer} from "~/components/record-container";
+
 import {TrackContainer} from "~/components/track/track-container";
 
 
@@ -64,7 +63,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-96 lg:flex-col bg-slate-50">
           <div className="border-r border-muted h-screen">
-            <RecordContainer />
+            <div className="px-4 sm:px6 lg:px-8 flex flex-col justify-center">
+              <div className="pt-10">
+                <h5 className="text-2xl">Text-to-Speech Recorder</h5>
+                <p className="text-muted-foreground mt-2 font-light">
+                  Conversations with the most tragically misunderstood people of our time.
+                </p>
+              </div>
+              <div>
+                <CreateRecord />
+              </div>
+            </div>
           </div>
         </div>
 
