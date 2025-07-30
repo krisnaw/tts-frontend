@@ -37,8 +37,9 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   }
 
   const token = session.get("token") as string;
+  const userId = session.get("userId") as string;
 
-  const result = await fetch("http://localhost:3000/records", {
+  const result = await fetch(`http://localhost:3000/records/${userId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -57,8 +58,6 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, token, records} = loaderData
-
-  console.log(records)
 
   return (
       <div className="w-full">
@@ -85,19 +84,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <div className="lg:pl-96">
           <TrackContainer records={records} />
         </div>
-
-
-        {/*{records && records.map((record: RecordType) => (*/}
-        {/*    <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">*/}
-        {/*      <p>{record.id}</p>*/}
-        {/*      <Form action={`/record/${record.id}/delete`} method="DELETE" >*/}
-        {/*        <Button type="submit">Delete</Button>*/}
-        {/*      </Form>*/}
-        {/*    </div>*/}
-        {/*))}*/}
-
-        {/*<CreateRecord />*/}
-
       </div>
   )
 }

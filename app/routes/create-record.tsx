@@ -9,8 +9,12 @@ import {Textarea} from "~/components/ui/textarea";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
 import {Slider} from "~/components/ui/slider";
 import {useState} from "react";
+import {z} from "zod";
+
 
 export async function action({request}: Route.ActionArgs) {
+
+  const formData = await request.formData();
 
   const session = await getSession(
       request.headers.get("Cookie"),
@@ -29,17 +33,17 @@ export async function action({request}: Route.ActionArgs) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
+
     method: "POST",
     body: JSON.stringify({
       userId: user_id,
-      content: "10",
-      pitch: "10",
-      volume: "10",
-      rate: "10",
+      content: formData.get("content") as string,
+      pitch: formData.get("pitch") as string,
+      volume: formData.get("volume") as string,
+      rate: formData.get("rate") as string,
       voice: "10",
     })
   })
-  console.log(response)
 
   return redirect('/')
 }
@@ -61,9 +65,9 @@ export default function CreateRecord() {
           <div className="grid grid-cols-1 gap-4 mt-6">
 
             <div>
-              <Label htmlFor="textInput">Text you want to convert</Label>
+              <Label htmlFor="content">Text you want to convert</Label>
               <div className="mt-2">
-                <Textarea className="bg-white" name="textInput" id="textInput" placeholder="Type here..." />
+                <Textarea className="bg-white" name="content" id="content" placeholder="Type here..." />
               </div>
             </div>
 
@@ -87,7 +91,7 @@ export default function CreateRecord() {
                 {rate}
               </div>
               <div className="mt-2">
-                <Slider value={[rate]} onValueChange={(e: number[]) => setRate(e[0])} max={100} step={1} />
+                <Slider name="rate" value={[rate]} onValueChange={(e: number[]) => setRate(e[0])} max={100} step={1} />
               </div>
             </div>
 
@@ -97,7 +101,7 @@ export default function CreateRecord() {
                 {pitch}
               </div>
               <div className="mt-2">
-                <Slider value={[pitch]} onValueChange={(e: number[]) => setPitch(e[0])} max={100} step={1} />
+                <Slider name="pitch" value={[pitch]} onValueChange={(e: number[]) => setPitch(e[0])} max={100} step={1} />
               </div>
             </div>
 
@@ -107,7 +111,7 @@ export default function CreateRecord() {
                 {volume}
               </div>
               <div className="mt-2">
-                <Slider value={[volume]} onValueChange={(e: number[]) => setVolume(e[0])} max={100} step={1} />
+                <Slider name="volume" value={[volume]} onValueChange={(e: number[]) => setVolume(e[0])} max={100} step={1} />
               </div>
             </div>
 

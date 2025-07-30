@@ -148,7 +148,7 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                         <div className="flex flex-col items-start">
 
                           <p className="text-muted-foreground font-light mt-2.5">
-                            {record.content} {record.id}
+                            {record.content}
                           </p>
 
                           <div className="text-muted-foreground order-first">
