@@ -1,23 +1,21 @@
-TODO
-- [✅] Deploy
-- [✅] Add Shadcn UI
-- [] Create Login page
-- [] Create Register page
+# TTS Frontend
 
-
-# Welcome to React Router!
-
-A modern, production-ready template for building full-stack React applications using React Router.
+A modern, production-ready frontend for a Text-to-Speech (TTS) application.
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **Framework**: [React](https://react.dev/) with [Vite](https://vitejs.dev/)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Schema Validation**: [Zod](https://zod.dev/)
+- **Authentication**: JWT-based authentication (login/register)
+- **Core Features**:
+    - User registration and login
+    - Voice selection for TTS
+    - Text-to-speech conversion and audio record creation
+    - Floating player for audio playback
+    - List and manage audio records
 
 ## Getting Started
 
@@ -47,14 +45,16 @@ Create a production build:
 npm run build
 ```
 
+This will create a `build` directory with the production-ready assets.
+
 ## Deployment
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fremix-run%2Freact-router-templates%2Ftree%2Fmain%2Fvercel&project-name=my-react-router-app&repository-name=my-react-router-app)
+This application can be deployed to any platform that supports Node.js. For example, you can use the `react-router-serve` command to run the server:
+
+```bash
+npm run start
+```
 
 ## Styling
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+This project uses [Tailwind CSS](https://tailwindcss.com/) for styling. The `tailwind-merge` and `clsx` utilities are used for combining and conditionally applying CSS classes.
