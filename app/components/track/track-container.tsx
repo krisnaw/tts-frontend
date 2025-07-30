@@ -135,7 +135,6 @@ export function TrackContainer({records}: { records: RecordType[] }) {
               <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
                 <h4 className="text-xl font-medium">Histories</h4>
               </div>
-
             </div>
           </div>
 
@@ -184,7 +183,6 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                                 {record.pitch}
                               </div>
                             </TooltipShell>
-
 
                           </div>
 

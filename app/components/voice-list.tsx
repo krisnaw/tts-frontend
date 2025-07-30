@@ -7,6 +7,7 @@ export function VoiceList() {
 
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [loading, setLoading] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState<string>('')
 
   useEffect(() => {
 
@@ -21,6 +22,7 @@ export function VoiceList() {
           const availableVoices = window.speechSynthesis.getVoices();
           setVoices(availableVoices)
           setLoading(false);
+          setSelectedVoice(availableVoices[0].name)
           console.log(availableVoices);
         };
 
@@ -44,7 +46,7 @@ export function VoiceList() {
         <Label htmlFor="voice">Select voices</Label>
 
         <div className="mt-2">
-          <Select name="voice">
+          <Select name="voice" defaultValue={selectedVoice}>
             <SelectTrigger name="voice" className="w-full bg-white">
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>
