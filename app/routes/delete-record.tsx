@@ -1,7 +1,6 @@
 import {redirect} from "react-router";
 import type { Route } from "./+types/delete-record";
 import {getSession} from "~/sessions.server";
-import {toast} from "sonner";
 
 export async function action({ params, request }: Route.ActionArgs) {
   const { recordId } = params;
@@ -28,10 +27,8 @@ export async function action({ params, request }: Route.ActionArgs) {
   console.log(response)
 
   if (response.status !== 200) {
-    toast.error("Something went wrong")
+    console.log("Something went wrong")
   }
-
-  toast.success("Record deleted")
 
   return redirect('/')
 }

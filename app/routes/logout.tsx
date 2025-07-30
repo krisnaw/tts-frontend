@@ -21,7 +21,9 @@ export async function action({request}: Route.ActionArgs) {
 
 export default function LogoutRoute() {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+
+  const isSubmitting = navigation.state === "submitting" && navigation.formAction === "/logout";
+
   return (
       <div>
         <Form id="logout-form" method="POST" action="/logout">

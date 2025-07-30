@@ -5,12 +5,9 @@ import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
 import {jwtDecode} from "jwt-decode";
 import {Button} from "~/components/ui/button";
+import {RecordContainer} from "~/components/record-container";
+import {TrackContainer} from "~/components/track/track-container";
 
-
-type RecordType = {
-  id: string,
-  voice: string,
-}
 
 function isTokenExpired(token: string) {
   try {
@@ -50,6 +47,10 @@ export async function loader({ context, request }: Route.LoaderArgs) {
     method: "GET",
   })
 
+  if (result.status === 401 && result.statusText === "Unauthorized") {
+    return redirect("/login");
+  }
+
   const data = await result.json();
 
   return {  username: session.get('username'), token: token, records: data };
@@ -59,25 +60,31 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, token, records} = loaderData
 
   return (
-      <div>
-        Hello, {username}
+      <div className="w-full">
 
-        <div>
-          Token: {token}
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-96 lg:flex-col bg-slate-50">
+          <div className="border-r border-muted h-screen">
+            <RecordContainer />
+          </div>
         </div>
 
-        {records && records.map((record: RecordType) => (
-            <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">
-              <p>{record.id}</p>
-              <Form action={`/record/${record.id}/delete`} method="DELETE" >
-                <Button type="submit">Delete</Button>
-              </Form>
-            </div>
-        ))}
+        <div className="lg:pl-96">
+          <TrackContainer records={records} />
+        </div>
 
-        <CreateRecord />
 
-        <LogoutRoute />
+        {/*{records && records.map((record: RecordType) => (*/}
+        {/*    <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">*/}
+        {/*      <p>{record.id}</p>*/}
+        {/*      <Form action={`/record/${record.id}/delete`} method="DELETE" >*/}
+        {/*        <Button type="submit">Delete</Button>*/}
+        {/*      </Form>*/}
+        {/*    </div>*/}
+        {/*))}*/}
+
+        {/*<CreateRecord />*/}
+
+        {/*<LogoutRoute />*/}
       </div>
   )
 }
