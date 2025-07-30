@@ -7,17 +7,6 @@ import {jwtDecode} from "jwt-decode";
 
 import {TrackContainer} from "~/components/track/track-container";
 
-
-function isTokenExpired(token: string) {
-  try {
-    const { exp } = jwtDecode(token);
-    // @ts-ignore
-    return exp * 1000 > Date.now();
-  } catch {
-    return false;
-  }
-}
-
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -47,6 +36,7 @@ export async function loader({ context, request }: Route.LoaderArgs) {
     method: "GET",
   })
 
+  // if Unauthorized, the token might expired redirect to log in page
   if (result.status === 401 && result.statusText === "Unauthorized") {
     return redirect("/login");
   }
