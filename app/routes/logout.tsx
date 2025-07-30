@@ -3,7 +3,6 @@ import {
   destroySession,
 } from "~/sessions.server";
 
-
 import type { Route } from "./+types/logout";
 import {Form, redirect, useNavigation} from "react-router";
 import {Button} from "~/components/ui/button";

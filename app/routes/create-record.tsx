@@ -7,7 +7,6 @@ import {getSession} from "~/sessions.server";
 
 export async function action({request}: Route.ActionArgs) {
 
-
   const session = await getSession(
       request.headers.get("Cookie"),
   );
@@ -18,16 +17,22 @@ export async function action({request}: Route.ActionArgs) {
   }
 
   const token = session.get("token") as string;
-
+  const user_id = session.get("userId") as string;
 
   const response = await fetch("http://localhost:3000/records", {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-
     method: "POST",
-    body: JSON.stringify({})
+    body: JSON.stringify({
+      userId: user_id,
+      content: "10",
+      pitch: "10",
+      volume: "10",
+      rate: "10",
+      voice: "10",
+    })
   })
   console.log(response)
 

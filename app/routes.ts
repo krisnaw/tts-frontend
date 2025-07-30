@@ -7,5 +7,6 @@ export default [
     route("/register", "routes/register.tsx"),
 
 
-    route("/record/create", "routes/create-record.tsx")
+    route("/record/create", "routes/create-record.tsx"),
+    route("/record/:recordId/delete", "routes/delete-record.tsx")
 ] satisfies RouteConfig;

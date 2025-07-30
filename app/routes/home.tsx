@@ -1,9 +1,10 @@
 import type { Route } from "./+types/home";
 import {getSession} from "~/sessions.server";
-import {redirect} from "react-router";
+import {Form, redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
 import {jwtDecode} from "jwt-decode";
+import {Button} from "~/components/ui/button";
 
 
 type RecordType = {
@@ -51,21 +52,28 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 
   const data = await result.json();
 
-  return {  username: session.get('username'), records: data };
+  return {  username: session.get('username'), token: token, records: data };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const {username, records} = loaderData
+  const {username, token, records} = loaderData
 
   return (
       <div>
         Hello, {username}
 
-        {/*{records && records.map((record: RecordType) => (*/}
-        {/*    <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">*/}
-        {/*      <p>{record.id}</p>*/}
-        {/*    </div>*/}
-        {/*))}*/}
+        <div>
+          Token: {token}
+        </div>
+
+        {records && records.map((record: RecordType) => (
+            <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">
+              <p>{record.id}</p>
+              <Form action={`/record/${record.id}/delete`} method="DELETE" >
+                <Button type="submit">Delete</Button>
+              </Form>
+            </div>
+        ))}
 
         <CreateRecord />
 
