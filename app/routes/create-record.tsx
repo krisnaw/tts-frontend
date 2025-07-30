@@ -13,6 +13,7 @@ import {VoiceList} from "~/components/voice-list";
 export async function action({request}: Route.ActionArgs) {
 
   const formData = await request.formData();
+  console.log(formData)
 
   const session = await getSession(
       request.headers.get("Cookie"),
