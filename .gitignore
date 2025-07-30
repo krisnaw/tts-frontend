@@ -9,3 +9,5 @@
 /.vercel/
 .idea/
 /.idea
+.env
+/.env
