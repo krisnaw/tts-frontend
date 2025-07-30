@@ -1,15 +1,13 @@
 import {Form, redirect, useNavigation} from "react-router";
 import type {Route} from "./+types/create-record";
-import {Input} from "~/components/ui/input";
 import {Button} from "~/components/ui/button";
 import {Loader2, PlayIcon, SaveIcon} from "lucide-react";
 import {getSession} from "~/sessions.server";
 import {Label} from "~/components/ui/label";
 import {Textarea} from "~/components/ui/textarea";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
 import {Slider} from "~/components/ui/slider";
 import {useState} from "react";
-import {z} from "zod";
+import {VoiceList} from "~/components/voice-list";
 
 
 export async function action({request}: Route.ActionArgs) {
@@ -72,17 +70,7 @@ export default function CreateRecord() {
             </div>
 
             <div>
-              <Label htmlFor="voice">Select voices</Label>
-              <div className="mt-2">
-                <Select>
-                  <SelectTrigger name="voice" className="w-full bg-white">
-                    <SelectValue placeholder="Select a fruit" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="apple">Apple</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <VoiceList />
             </div>
 
             <div>
