@@ -13,7 +13,6 @@ export async function action({request}: Route.ActionArgs) {
   const session = await getSession(
       request.headers.get("Cookie"),
   );
-  console.log("server")
   return redirect("/login", {
     headers: {
       "Set-Cookie": await destroySession(session),
@@ -26,7 +25,7 @@ export default function LogoutRoute() {
   const isSubmitting = navigation.state === "submitting";
   return (
       <div>
-        <Form method="POST" action="/logout">
+        <Form id="logout-form" method="POST" action="/logout">
           <Button disabled={isSubmitting} type="submit">
             Logout
             {isSubmitting &&  <Loader2 className="animate-spin" />}

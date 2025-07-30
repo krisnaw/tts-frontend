@@ -1,8 +1,6 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 import {getSession} from "~/sessions.server";
-import {Button} from "~/components/ui/button";
-import {Form, redirect} from "react-router";
+import {redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
 import {jwtDecode} from "jwt-decode";
@@ -58,7 +56,7 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, records} = loaderData
-  console.log(records)
+
   return (
       <div>
         Hello, {username}
@@ -69,7 +67,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         {/*    </div>*/}
         {/*))}*/}
 
-        {/*<CreateRecord />*/}
+        <CreateRecord />
 
         <LogoutRoute />
       </div>
