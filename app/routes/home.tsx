@@ -58,12 +58,14 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, token, records} = loaderData
 
+  console.log(records)
+
   return (
       <div className="w-full">
 
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-96 lg:flex-col bg-slate-50">
           <div className="border-r border-muted h-screen">
-            <div className="px-4 sm:px6 lg:px-8 flex flex-col justify-center">
+            <div className="px-4 sm:px6 lg:px-8 py-6 flex flex-col justify-center">
               <div className="pt-10">
                 <h5 className="text-2xl">Text-to-Speech Recorder</h5>
                 <p className="text-muted-foreground mt-2 font-light">
@@ -72,6 +74,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               </div>
               <div>
                 <CreateRecord />
+              </div>
+              <div className="fixed bottom-0 mb-5 w-full">
+                <LogoutRoute />
               </div>
             </div>
           </div>
@@ -93,7 +98,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
         {/*<CreateRecord />*/}
 
-        {/*<LogoutRoute />*/}
       </div>
   )
 }

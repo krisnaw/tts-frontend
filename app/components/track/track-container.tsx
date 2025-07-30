@@ -1,7 +1,10 @@
 import type {RecordType} from "~/lib/types";
-import {TrackItem} from "~/components/track/track-item";
+import {Button} from "~/components/ui/button";
+import {PlayIcon, TrashIcon} from "lucide-react";
+import {format} from "date-fns";
+import {Form} from "react-router";
 
-export function TrackContainer({records} : {records : RecordType[]}) {
+export function TrackContainer({records}: { records: RecordType[] }) {
   return (
       <>
         <svg aria-hidden="true" className="absolute top-0 left-0 h-20 w-full">
@@ -136,8 +139,42 @@ export function TrackContainer({records} : {records : RecordType[]}) {
           </div>
 
           <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-            {records.map((_, i) => (
-                <TrackItem key={i} />
+            {records.map((record: RecordType) => (
+                <article className="py-10 sm:py-12" key={record.id}>
+                  <div className="px-4 sm:px-6 lg:px-8">
+                    <div className="lg:max-w-4xl">
+                      <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+
+                        <div className="flex flex-col items-start">
+
+                          <p className="text-muted-foreground font-light mt-2.5">
+                            {record.content} {record.id}
+                          </p>
+
+                          <div className="text-muted-foreground order-first">
+                            {format(new Date(record.createdAt), 'PPpp')}
+                          </div>
+
+                          <div className="mt-4 w-full flex justify-between">
+                            <div>
+                              <Button variant="outline"><PlayIcon/> Listen</Button>
+                            </div>
+
+                            <div>
+                              <Form action={`/record/${record.id}/delete`} method="DELETE">
+                                <Button type="submit" variant="ghost" size="icon" className="text-muted-foreground">
+                                  <TrashIcon />
+                                </Button>
+                              </Form>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </article>
             ))}
           </div>
 

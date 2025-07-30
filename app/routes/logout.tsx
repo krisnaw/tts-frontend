@@ -27,7 +27,7 @@ export default function LogoutRoute() {
   return (
       <div>
         <Form id="logout-form" method="POST" action="/logout">
-          <Button disabled={isSubmitting} type="submit">
+          <Button disabled={isSubmitting} type="submit" variant="secondary">
             Logout
             {isSubmitting &&  <Loader2 className="animate-spin" />}
           </Button>
