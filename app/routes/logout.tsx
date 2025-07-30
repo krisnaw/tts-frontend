@@ -2,6 +2,8 @@ import {
   getSession,
   destroySession,
 } from "~/sessions.server";
+
+
 import type { Route } from "./+types/logout";
 import {Form, redirect, useNavigation} from "react-router";
 import {Button} from "~/components/ui/button";
@@ -11,6 +13,7 @@ export async function action({request}: Route.ActionArgs) {
   const session = await getSession(
       request.headers.get("Cookie"),
   );
+  console.log("server")
   return redirect("/login", {
     headers: {
       "Set-Cookie": await destroySession(session),
@@ -22,13 +25,13 @@ export default function LogoutRoute() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   return (
-      <>
-        <Form method="post">
+      <div>
+        <Form method="POST" action="/logout">
           <Button disabled={isSubmitting} type="submit">
             Logout
             {isSubmitting &&  <Loader2 className="animate-spin" />}
           </Button>
         </Form>
-      </>
+      </div>
   );
 }

@@ -5,7 +5,23 @@ import {Button} from "~/components/ui/button";
 import {Form, redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
+import {jwtDecode} from "jwt-decode";
 
+
+type RecordType = {
+  id: string,
+  voice: string,
+}
+
+function isTokenExpired(token: string) {
+  try {
+    const { exp } = jwtDecode(token);
+    // @ts-ignore
+    return exp * 1000 > Date.now();
+  } catch {
+    return false;
+  }
+}
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,20 +37,39 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   );
 
   // if it doesn't have a token, redirect to log in
-  if (!session.has("token")) {
+  if (!session.has("token") && session.get("token") == undefined) {
     return redirect("/login");
   }
 
-  return {  username: session.get('username') };
+  const token = session.get("token") as string;
+
+  const result = await fetch("http://localhost:3000/records", {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    method: "GET",
+  })
+
+  const data = await result.json();
+
+  return {  username: session.get('username'), records: data };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const {username} = loaderData
+  const {username, records} = loaderData
+  console.log(records)
   return (
       <div>
         Hello, {username}
 
-        <CreateRecord />
+        {/*{records && records.map((record: RecordType) => (*/}
+        {/*    <div key={record.id} className="flex flex-col gap-3 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">*/}
+        {/*      <p>{record.id}</p>*/}
+        {/*    </div>*/}
+        {/*))}*/}
+
+        {/*<CreateRecord />*/}
 
         <LogoutRoute />
       </div>
