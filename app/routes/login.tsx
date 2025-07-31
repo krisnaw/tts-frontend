@@ -24,11 +24,15 @@ export async function action({request} : Route.ActionArgs) {
     })
   })
 
+
+  console.log(response)
+
   if (response.status !== 200) {
-    return redirect("/dashboard");
+    console.log("Something went wrong")
   }
 
   const result = await response.json();
+  console.log(result)
 
   session.set('userId', result.user.id);
   session.set('username', result.user.name);
