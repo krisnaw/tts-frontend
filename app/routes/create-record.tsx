@@ -21,7 +21,7 @@ const RecordSchema = z.object({
 
 
 export async function action({request}: Route.ActionArgs) {
-
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
   const formData = await request.formData();
 
   // const validate = RecordSchema.safeParse(formData);
@@ -42,7 +42,7 @@ export async function action({request}: Route.ActionArgs) {
   const token = session.get("token") as string;
   const user_id = session.get("userId") as string;
 
-  const response = await fetch("http://localhost:3000/records", {
+  const response = await fetch(`${endpoint}/records`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

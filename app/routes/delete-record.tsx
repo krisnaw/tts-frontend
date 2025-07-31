@@ -1,8 +1,9 @@
 import {redirect} from "react-router";
-import type { Route } from "./+types/delete-record";
+import type {Route} from "./+types/delete-record";
 import {getSession} from "~/sessions.server";
 
 export async function action({ params, request }: Route.ActionArgs) {
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
   const { recordId } = params;
 
   const session = await getSession(
@@ -16,7 +17,7 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   const token = session.get("token") as string;
 
-  const response = await fetch(`http://localhost:3000/records/${recordId}`, {
+  const response = await fetch(`${endpoint}/records/${recordId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
