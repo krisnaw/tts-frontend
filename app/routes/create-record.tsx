@@ -1,4 +1,4 @@
-import {Form, redirect, data, useNavigation} from "react-router";
+import {Form, redirect, useNavigation} from "react-router";
 import type {Route} from "./+types/create-record";
 import {Button} from "~/components/ui/button";
 import {Loader2, PlayIcon, SaveIcon} from "lucide-react";
@@ -7,7 +7,6 @@ import {Label} from "~/components/ui/label";
 import {Textarea} from "~/components/ui/textarea";
 import {Slider} from "~/components/ui/slider";
 import {useEffect, useState} from "react";
-import {VoiceList} from "~/components/voice-list";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
 import {z} from "zod";
 
@@ -25,11 +24,11 @@ export async function action({request}: Route.ActionArgs) {
 
   const formData = await request.formData();
 
-  const validate = RecordSchema.safeParse(formData);
-
-  if (!validate.success) {
-    return data({ errors: z.treeifyError(validate.error) }, { status: 400 });
-  }
+  // const validate = RecordSchema.safeParse(formData);
+  //
+  // if (!validate.success) {
+  //   return data({ errors: z.treeifyError(validate.error) }, { status: 400 });
+  // }
 
   const session = await getSession(
       request.headers.get("Cookie"),

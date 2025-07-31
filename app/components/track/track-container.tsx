@@ -1,6 +1,6 @@
 import type {RecordType} from "~/lib/types";
 import {Button} from "~/components/ui/button";
-import {Activity, AudioLines, FileAudio, Gauge, PlayIcon, TrashIcon, Volume2, VolumeIcon} from "lucide-react";
+import {AudioLines, CassetteTape, FileAudio, Gauge, PlayIcon, TrashIcon, Volume2} from "lucide-react";
 import {format} from "date-fns";
 import {Form} from "react-router";
 import {TooltipShell} from "~/components/tooltip-shell";
@@ -139,7 +139,20 @@ export function TrackContainer({records}: { records: RecordType[] }) {
           </div>
 
           <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-            {records.map((record: RecordType) => (
+
+            {records.length === 0 && (
+                <div className="py-10 sm:py-12 text-center grid place-items-center">
+                  <div className="text-muted-foreground">
+                    <CassetteTape size={64} />
+                  </div>
+                  <div>
+                    <h2 className="text-lg text-muted-foreground">No record yet, please save one. </h2>
+                  </div>
+                </div>
+            )}
+
+
+            {records.length > 0 && records.map((record: RecordType) => (
                 <article className="py-10 sm:py-12" key={record.id}>
                   <div className="px-4 sm:px-6 lg:px-8">
                     <div className="lg:max-w-4xl">

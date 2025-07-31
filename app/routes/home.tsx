@@ -48,7 +48,6 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, token, records} = loaderData
-
   return (
       <div className="w-full">
 
