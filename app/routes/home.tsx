@@ -1,9 +1,8 @@
-import type { Route } from "./+types/home";
+import type {Route} from "./+types/home";
 import {getSession} from "~/sessions.server";
-import {redirect} from "react-router";
+import {isRouteErrorResponse, redirect, useRouteError} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
-
 import {TrackContainer} from "~/components/track/track-container";
 
 export function meta({}: Route.MetaArgs) {
@@ -43,11 +42,12 @@ export async function loader({ context, request }: Route.LoaderArgs) {
 
   const data = await result.json();
 
-  return {  username: session.get('username'), token: token, records: data };
+  return {  username: session.get('username'), token: token, records: data};
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const {username, token, records} = loaderData
+
   return (
       <div className="w-full">
 
@@ -71,8 +71,37 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </div>
 
         <div className="lg:pl-96">
+
           <TrackContainer records={records} />
+
         </div>
       </div>
   )
+}
+
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+        <div>
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+          <p>{error.data}</p>
+        </div>
+    );
+  } else if (error instanceof Error) {
+    return (
+        <div>
+          <h1>Error</h1>
+          <p>{error.message}</p>
+          <p>The stack trace is:</p>
+          <pre>{error.stack}</pre>
+        </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
 }

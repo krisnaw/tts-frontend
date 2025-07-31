@@ -26,12 +26,11 @@ export async function action({request} : Route.ActionArgs) {
     })
   })
 
+  const result = await response.json();
+
   if (!response.ok) {
-    const result = await response.json();
     return { success: false, message: result.message }
   }
-
-  const result = await response.json();
 
   session.set('userId', result.user.id);
   session.set('username', result.user.name);

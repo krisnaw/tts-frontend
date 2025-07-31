@@ -14,7 +14,6 @@ export async function action({request}: Route.ActionArgs) {
   const endpoint = import.meta.env.VITE_API_ENDPOINT
   const formData = await request.formData();
 
-
   const session = await getSession(
       request.headers.get("Cookie"),
   );
@@ -44,6 +43,13 @@ export async function action({request}: Route.ActionArgs) {
     })
   })
 
+  const result = await response.json();
+  console.log(result)
+
+  if (!response.ok) {
+    return redirect('/login');
+  }
+
   return redirect('/')
 }
 
@@ -55,14 +61,13 @@ const PLAYER_STATUS = {
 };
 
 export default function CreateRecord() {
-
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting" && navigation.formAction === "/record/create";
 
   const [rate, setRate] = useState<number>(1);
   const [pitch, setPitch] = useState<number>(2);
   const [volume, setVolume] = useState<number>(1);
-  const [content, setContent] = useState<string>('Conversations with the most tragically misunderstood people of our time.')
+  const [content, setContent] = useState<string>('')
 
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [loading, setLoading] = useState(false);

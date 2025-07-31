@@ -4,25 +4,9 @@ import {AudioLines, CassetteTape, FileAudio, Gauge, PlayIcon, Volume2} from "luc
 import {format} from "date-fns";
 import {TooltipShell} from "~/components/tooltip-shell";
 import {DeleteButton} from "~/components/delete-button";
-import {useState} from "react";
+import {Form} from "react-router";
 
 export function TrackContainer({records}: { records: RecordType[] }) {
-
-  const [items, setItems] = useState<SpeechSynthesisVoice[]>([]);
-
-  const onClickPlayHandler = (recordId: number) => {
-
-    const getRecord = records.find((record) => record.id === recordId);
-    if (!getRecord) return;
-
-    const utterThis = new SpeechSynthesisUtterance(getRecord.content);
-    const synth = window.speechSynthesis;
-    utterThis.volume = Number(getRecord.volume)
-    utterThis.pitch = Number(getRecord.pitch)
-    utterThis.rate = Number(getRecord.rate)
-    synth.speak(utterThis);
-
-  }
 
   return (
       <>
@@ -100,7 +84,10 @@ export function TrackContainer({records}: { records: RecordType[] }) {
 
                           <div className="mt-4 w-full flex justify-between">
                             <div>
-                              <Button variant="outline" onClick={() => onClickPlayHandler(record.id)}><PlayIcon/> Listen</Button>
+                              <Form>
+                                <input name="play" type="text" value={record.id}/>
+                                <Button type="submit" variant="outline" ><PlayIcon/> Listen</Button>
+                              </Form>
                             </div>
 
                             <div>
