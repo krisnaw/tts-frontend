@@ -8,28 +8,12 @@ import {Textarea} from "~/components/ui/textarea";
 import {Slider} from "~/components/ui/slider";
 import {useEffect, useRef, useState} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
-import {z} from "zod";
 import {toast} from "sonner";
-
-const RecordSchema = z.object({
-  userId: z.number(),
-  content: z.string(),
-  volume: z.string(),
-  pitch: z.string(),
-  rate: z.string(),
-  voice: z.string(),
-})
-
 
 export async function action({request}: Route.ActionArgs) {
   const endpoint = import.meta.env.VITE_API_ENDPOINT
   const formData = await request.formData();
 
-  // const validate = RecordSchema.safeParse(formData);
-  //
-  // if (!validate.success) {
-  //   return data({ errors: z.treeifyError(validate.error) }, { status: 400 });
-  // }
 
   const session = await getSession(
       request.headers.get("Cookie"),
@@ -171,8 +155,6 @@ export default function CreateRecord() {
       toast.info('Text is stopped')
     }
   }
-
-
 
   return (
       <div>
