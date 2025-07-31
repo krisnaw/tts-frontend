@@ -1,4 +1,4 @@
-import {Form, redirect, useNavigation} from "react-router";
+import {Form, redirect, data, useNavigation} from "react-router";
 import type {Route} from "./+types/create-record";
 import {Button} from "~/components/ui/button";
 import {Loader2, PlayIcon, SaveIcon} from "lucide-react";
@@ -9,12 +9,27 @@ import {Slider} from "~/components/ui/slider";
 import {useEffect, useState} from "react";
 import {VoiceList} from "~/components/voice-list";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
+import {z} from "zod";
+
+const RecordSchema = z.object({
+  userId: z.number(),
+  content: z.string(),
+  volume: z.string(),
+  pitch: z.string(),
+  rate: z.string(),
+  voice: z.string(),
+})
 
 
 export async function action({request}: Route.ActionArgs) {
 
   const formData = await request.formData();
-  console.log(formData)
+
+  const validate = RecordSchema.safeParse(formData);
+
+  if (!validate.success) {
+    return data({ errors: z.treeifyError(validate.error) }, { status: 400 });
+  }
 
   const session = await getSession(
       request.headers.get("Cookie"),
@@ -103,6 +118,8 @@ export default function CreateRecord() {
 
     synth.speak(utterThis);
   }
+
+  // TODO: change form to useFetcher
 
   return (
       <div>

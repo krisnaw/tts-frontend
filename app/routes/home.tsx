@@ -1,9 +1,8 @@
 import type { Route } from "./+types/home";
 import {getSession} from "~/sessions.server";
-import {Form, redirect} from "react-router";
+import {redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
-import {jwtDecode} from "jwt-decode";
 
 import {TrackContainer} from "~/components/track/track-container";
 
@@ -15,6 +14,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ context, request }: Route.LoaderArgs) {
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
 
   const session = await getSession(
       request.headers.get("Cookie"),
@@ -28,7 +28,7 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   const token = session.get("token") as string;
   const userId = session.get("userId") as string;
 
-  const result = await fetch(`http://localhost:3000/records/${userId}`, {
+  const result = await fetch(`${endpoint}/records/${userId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

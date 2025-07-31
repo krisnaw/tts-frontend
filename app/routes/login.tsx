@@ -4,7 +4,7 @@ import type { Route } from "./+types/login";
 import {commitSession, getSession} from "~/sessions.server";
 
 export async function action({request} : Route.ActionArgs) {
-
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
   const session = await getSession(
       request.headers.get("Cookie"),
   );
@@ -13,7 +13,7 @@ export async function action({request} : Route.ActionArgs) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const response = await fetch("http://localhost:3000/login", {
+  const response = await fetch(`${endpoint}/login`, {
     headers: {
       'Content-Type': 'application/json'
     },
