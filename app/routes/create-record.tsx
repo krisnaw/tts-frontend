@@ -77,10 +77,9 @@ export default function CreateRecord() {
     if (typeof window !== 'undefined') {
       const hasWebSpeech = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
       if (hasWebSpeech) {
-        console.log('Web Speech API is supported.');
+        toast.info('Web Speech API is supported.');
         setLoading(true);
 
-        // Some browsers load voices asynchronously
         window.speechSynthesis.onvoiceschanged = () => {
           const availableVoices = window.speechSynthesis.getVoices();
           setVoices(availableVoices)
@@ -225,16 +224,16 @@ export default function CreateRecord() {
             </div>
 
             <div className="flex justify-between space-x-4">
-              <Button size="lg" className="w-1/2" disabled={isSubmitting} type="submit">
+              <Button size="lg" className="w-1/2" disabled={isSubmitting} type="submit" variant="outline">
                 <SaveIcon />
                 {isSubmitting && <Loader2 className="animate-spin" />}
               </Button>
 
               <div className="grid grid-cols-2 gap-x-2.5">
-                <Button type="button" size="icon" onClick={onClickStopHandler} variant="secondary">
+                <Button type="button" size="icon" onClick={onClickStopHandler} variant="outline">
                   <SquareStop />
                 </Button>
-                <Button type="button" size="icon" variant="outline" onClick={onClickHandler}>
+                <Button type="button" size="icon" onClick={onClickHandler}>
                   {playingState == PLAYER_STATUS.RESUMED || playingState == PLAYER_STATUS.PLAYING ? <PauseIcon /> : <PlayIcon />}
                 </Button>
               </div>
