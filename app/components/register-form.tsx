@@ -30,14 +30,15 @@ export function RegisterForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <div>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="name">Username</Label>
                 <Input
                     autoFocus
-                    id="username"
+                    id="name"
                     type="text"
+                    name="name"
                     placeholder="John doe"
                     required
                 />
@@ -47,6 +48,7 @@ export function RegisterForm({
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="m@example.com"
                   required
                 />
@@ -55,11 +57,11 @@ export function RegisterForm({
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Input name="password" id="password" type="password" required />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  Login
+                  Register
                   {isSubmitting &&  <Loader2 className="animate-spin" />}
                 </Button>
               </div>
@@ -70,7 +72,7 @@ export function RegisterForm({
                 Sign in
               </a>
             </div>
-          </form>
+          </div>
         </CardContent>
       </Card>
     </div>

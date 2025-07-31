@@ -37,7 +37,9 @@ export async function action({request} : Route.ActionArgs) {
   // Login succeeded, send them to the home page.
   return redirect("/", {
     headers: {
-      "Set-Cookie": await commitSession(session),
+      "Set-Cookie": await commitSession(session, {
+        expires: new Date(Date.now() + 86_400_000)
+      }),
     },
   });
 }
