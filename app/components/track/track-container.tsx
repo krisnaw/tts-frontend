@@ -1,11 +1,12 @@
 import type {RecordType} from "~/lib/types";
 import {Button} from "~/components/ui/button";
-import {AudioLines, CassetteTape, FileAudio, Gauge, PlayIcon, TrashIcon, Volume2} from "lucide-react";
+import {AudioLines, CassetteTape, FileAudio, Gauge, PlayIcon, Volume2} from "lucide-react";
 import {format} from "date-fns";
-import {Form} from "react-router";
 import {TooltipShell} from "~/components/tooltip-shell";
+import {DeleteButton} from "~/components/delete-button";
 
 export function TrackContainer({records}: { records: RecordType[] }) {
+
   return (
       <>
         <svg aria-hidden="true" className="absolute top-0 left-0 h-20 w-full">
@@ -205,11 +206,7 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                             </div>
 
                             <div>
-                              <Form action={`/record/${record.id}/delete`} method="DELETE">
-                                <Button type="submit" variant="ghost" size="icon" className="text-muted-foreground">
-                                  <TrashIcon />
-                                </Button>
-                              </Form>
+                              <DeleteButton record={record} />
                             </div>
                           </div>
 

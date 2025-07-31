@@ -25,8 +25,6 @@ export async function action({ params, request }: Route.ActionArgs) {
     method: "DELETE",
   })
 
-  console.log(response)
-
   if (response.status !== 200) {
     console.log("Something went wrong")
   }

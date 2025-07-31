@@ -118,7 +118,6 @@ export default function CreateRecord() {
     synth.speak(utterThis);
   }
 
-  // TODO: change form to useFetcher
 
   return (
       <div>
