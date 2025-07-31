@@ -1,6 +1,6 @@
-import { LoginForm } from "~/components/login-form"
-import {Form, redirect, useNavigation} from "react-router";
-import type { Route } from "./+types/login";
+import {LoginForm} from "~/components/login-form"
+import {Form, redirect} from "react-router";
+import type {Route} from "./+types/login";
 import {commitSession, getSession} from "~/sessions.server";
 
 export async function action({request} : Route.ActionArgs) {
@@ -47,10 +47,20 @@ export async function action({request} : Route.ActionArgs) {
 
 }
 
-export default function Login() {
+export async function loader({ request }: Route.LoaderArgs) {
+  const endpoint  =  import.meta.env.VITE_API_ENDPOINT;
+  const res = await fetch(`${endpoint}/users`);
+  const result = await res.json();
+  return { endpoint: endpoint, users: result}
+}
+
+export default function Login({loaderData} : Route.ComponentProps) {
+  const {endpoint, users} = loaderData;
+  console.log(users)
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      {endpoint}
       <div className="w-full max-w-sm">
         <Form method="POST">
           <LoginForm />
