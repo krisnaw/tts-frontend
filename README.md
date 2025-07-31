@@ -2,6 +2,15 @@
 
 A modern, production-ready frontend for a Text-to-Speech (TTS) application.
 
+## TODO FEATURE
+- [✅] Login page
+- [✅] Register page
+- [✅] Save record component
+- [✅] List of a record component
+- [✅] Logout component
+- [] Text-to-speech component for Add Record
+- [] Text-to-speech component for Record Histories
+
 ## Features
 
 - **Framework**: [React](https://react.dev/) with [Vite](https://vitejs.dev/)
