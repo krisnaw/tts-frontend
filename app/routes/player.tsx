@@ -12,11 +12,23 @@ export default function Player() {
 
 
     // const fetchRecord = async () => {
-    //   const res = await fetch(`http://localhost:3000/record/${searchParams.get('play')}/`)
+    //   const res = await fetch(`http://localhost:3000/record/${searchParams.get('play')}/`, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${token}`
+    //     },
+    //     method: "GET",
+    //   })
+    //   console.log(res)
     // }
-    //
-    // fetchRecord()
+
     setRecordId(searchParams.get('play'))
+
+    // if (searchParams.get('play') == null) {
+    //   fetchRecord()
+    // }
+
+
 
   }, [searchParams]);
 

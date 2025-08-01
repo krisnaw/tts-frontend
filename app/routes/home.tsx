@@ -34,9 +34,6 @@ export async function loader({ context, request }: Route.LoaderArgs) {
     },
     method: "GET",
   })
-
-  console.log(result)
-
   // if Unauthorized, the token might expired redirect to log in page
   if (result.status === 401 && result.statusText === "Unauthorized") {
     return redirect("/login");
