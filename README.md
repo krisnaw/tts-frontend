@@ -46,6 +46,12 @@ A modern, production-ready frontend for a Text-to-Speech (TTS) application.
 
 ## Getting Started
 
+### Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file. You can create this file by copying the `.env.example` file:
+
+`VITE_API_ENDPOINT`: The endpoint of the backend API.
+
 ### Installation
 
 Install the dependencies:
