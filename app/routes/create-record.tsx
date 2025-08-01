@@ -83,16 +83,32 @@ export default function CreateRecord() {
       if (hasWebSpeech) {
         setLoading(true);
 
-        window.speechSynthesis.onvoiceschanged = () => {
-          const availableVoices = window.speechSynthesis.getVoices();
-          setVoices(availableVoices)
-          setLoading(false);
-          setSelectedVoice(availableVoices[0].name)
+        const synth = window.speechSynthesis;
+
+        // Function to load voices
+        const loadVoices = () => {
+          const availableVoices = synth.getVoices();
+          if (availableVoices.length > 0) {
+            setVoices(availableVoices);
+            setVoices(availableVoices)
+            setLoading(false);
+            setSelectedVoice(availableVoices[0].name)
+          }
         };
 
-        return () => {
-          window.speechSynthesis.onvoiceschanged = null;
+        // Load voices immediately
+        loadVoices();
+
+        // Handle asynchronous voice loading in some browsers
+        synth.onvoiceschanged = () => {
+          loadVoices();
         };
+
+        // Cleanup event listener
+        return () => {
+          synth.onvoiceschanged = null;
+        };
+
       }
     }
 
