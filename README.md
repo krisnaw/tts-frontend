@@ -7,20 +7,20 @@ A modern, production-ready frontend for a Text-to-Speech (TTS) application.
 - [✅] Register page
 - [✅] Save record component
 - [✅] List of a record component
-  - [] Display a list of previous text-to-speech conversions.
-  - [] Each history record should contain
+  - [✅] Display a list of previous text-to-speech conversions.
+  - [✅] Each history record should contain
     - [✅] The text that was converted.
     - [✅] The selected voice (language/accent)
     - [✅] The customization settings (rate, pitch, volume)
     - [✅] The date and time of the conversion
-    - [] A button to replay the audio
+    - [✅] A button to replay the audio
 - [✅] Logout component
-- [] Text-to-speech component for Add Record
+- [✅] Text-to-speech component for Add Record
   - [✅] Allow users to adjust speech rate (speed), pitch, and volume using
     sliders or input fields.
   - [✅] A dropdown or selection menu to choose from available voices
-  - [] Audio Controls: Buttons to start, pause, and stop the speech synthesis
-- [] Text-to-speech component for Record Histories
+  - [✅] Audio Controls: Buttons to start, pause, and stop the speech synthesis
+- [✅] Text-to-speech component for Record Histories
 
 ## Features
 
