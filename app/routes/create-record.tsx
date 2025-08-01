@@ -82,7 +82,6 @@ export default function CreateRecord() {
     if (typeof window !== 'undefined') {
       const hasWebSpeech = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
       if (hasWebSpeech) {
-        toast.info('Web Speech API is supported.');
         setLoading(true);
 
         window.speechSynthesis.onvoiceschanged = () => {

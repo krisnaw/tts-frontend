@@ -5,6 +5,7 @@ import {format} from "date-fns";
 import {TooltipShell} from "~/components/tooltip-shell";
 import {DeleteButton} from "~/components/delete-button";
 import {Form} from "react-router";
+import Player from "~/routes/player";
 
 export function TrackContainer({records}: { records: RecordType[] }) {
 
@@ -83,9 +84,10 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                           </div>
 
                           <div className="mt-4 w-full flex justify-between">
+
                             <div>
                               <Form>
-                                <input name="play" type="text" value={record.id}/>
+                                <input name="play" type="hidden" value={record.id}/>
                                 <Button type="submit" variant="outline" ><PlayIcon/> Listen</Button>
                               </Form>
                             </div>
@@ -103,6 +105,11 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                 </article>
             ))}
           </div>
+
+
+          <Player />
+
+
 
         </div>
       </>

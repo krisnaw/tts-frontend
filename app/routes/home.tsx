@@ -1,6 +1,6 @@
 import type {Route} from "./+types/home";
 import {getSession} from "~/sessions.server";
-import {isRouteErrorResponse, redirect, useRouteError} from "react-router";
+import {redirect} from "react-router";
 import LogoutRoute from "~/routes/logout";
 import CreateRecord from "~/routes/create-record";
 import {TrackContainer} from "~/components/track/track-container";
@@ -25,7 +25,7 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   }
 
   const token = session.get("token") as string;
-  const userId = session.get("userId") as string;
+  const userId = session.get("userId");
 
   const result = await fetch(`${endpoint}/records/${userId}`, {
     headers: {
@@ -34,6 +34,8 @@ export async function loader({ context, request }: Route.LoaderArgs) {
     },
     method: "GET",
   })
+
+  console.log(result)
 
   // if Unauthorized, the token might expired redirect to log in page
   if (result.status === 401 && result.statusText === "Unauthorized") {
@@ -63,7 +65,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               <div>
                 <CreateRecord />
               </div>
-              <div className="fixed bottom-0 mb-5 w-full">
+              <div className="fixed bottom-0 mb-5">
                 <LogoutRoute />
               </div>
             </div>
@@ -77,31 +79,4 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </div>
       </div>
   )
-}
-
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    return (
-        <div>
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
-          <p>{error.data}</p>
-        </div>
-    );
-  } else if (error instanceof Error) {
-    return (
-        <div>
-          <h1>Error</h1>
-          <p>{error.message}</p>
-          <p>The stack trace is:</p>
-          <pre>{error.stack}</pre>
-        </div>
-    );
-  } else {
-    return <h1>Unknown Error</h1>;
-  }
 }
