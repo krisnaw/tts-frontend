@@ -1,14 +1,8 @@
-import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card"
-import { Input } from "~/components/ui/input"
-import { Label } from "~/components/ui/label"
+import {cn} from "~/lib/utils"
+import {Button} from "~/components/ui/button"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "~/components/ui/card"
+import {Input} from "~/components/ui/input"
+import {Label} from "~/components/ui/label"
 import {useNavigation} from "react-router";
 import {Loader2} from "lucide-react";
 
@@ -38,7 +32,6 @@ export function LoginForm({
                   id="email"
                   type="email"
                   name="email"
-                  value="krisna@mail.com"
                   placeholder="m@example.com"
                   required
                 />
@@ -53,7 +46,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" name="password" value="qwerty57" required />
+                <Input id="password" type="password" name="password" required />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
