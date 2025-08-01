@@ -22,6 +22,13 @@ A modern, production-ready frontend for a Text-to-Speech (TTS) application.
   - [✅] Audio Controls: Buttons to start, pause, and stop the speech synthesis
 - [✅] Text-to-speech component for Record Histories
 
+## Explanation and trade-off 
+- React Router v7 + Vite is a great combination for building React.js user interfaces. It is fast, lightweight, and its main feature is nested routing for building complex UIs.
+
+- React Router provides many built-in helper functions for building applications, such as the useSearchParams hook to get the current query parameters.
+
+- Unlike other build tools like Webpack, Vite offers a modern and fast approach. Deploying to Vercel, for instance, only takes 22–27 seconds.
+
 ## Features
 
 - **Framework**: [React](https://react.dev/) with [Vite](https://vitejs.dev/)
