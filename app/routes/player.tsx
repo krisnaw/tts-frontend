@@ -13,7 +13,7 @@ const PLAYER_STATUS = {
 };
 
 export default function Player({token} : {token: string}) {
-
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
   const [searchParams, setSearchParams] = useSearchParams();
   const [recordId, setRecordId] = useState<string | null>(null);
   const [record, setRecord] = useState<RecordType | null>(null)
@@ -32,7 +32,7 @@ export default function Player({token} : {token: string}) {
     setRecordId(recordId)
 
     const fetchRecord = async () => {
-      const url = `http://localhost:3000/record/${searchParams.get('play')}`
+      const url = `${endpoint}/record/${searchParams.get('play')}`
 
       const result = await fetch(url, {
         headers: {
