@@ -71,7 +71,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
         <div className="lg:pl-96">
 
-          <TrackContainer records={records} />
+          <TrackContainer records={records} token={token} />
 
         </div>
       </div>

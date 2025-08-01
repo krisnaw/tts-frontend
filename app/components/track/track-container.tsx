@@ -7,12 +7,12 @@ import {DeleteButton} from "~/components/delete-button";
 import {Form} from "react-router";
 import Player from "~/routes/player";
 
-export function TrackContainer({records}: { records: RecordType[] }) {
+export function TrackContainer({records, token}: { records: RecordType[], token: string }) {
 
   return (
       <>
 
-        <div className="w-full pt-16 pb-12 sm:pb-4 lg:pt-12">
+        <div className="w-full pt-16 pb-12 sm:pb-32 lg:pt-12">
 
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="lg:max-w-4xl">
@@ -63,21 +63,21 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                             <TooltipShell content="Volume">
                               <div className="text-muted-foreground flex gap-x-2.5">
                                 <Volume2 />
-                                {record.volume}
+                                {parseFloat(record.volume)}
                               </div>
                             </TooltipShell>
 
                             <TooltipShell content="Rate">
                               <div className="text-muted-foreground flex gap-x-2.5">
                                 <Gauge />
-                                {record.rate}
+                                {parseFloat(record.rate)}
                               </div>
                             </TooltipShell>
 
                             <TooltipShell content="Pitch">
                               <div className="text-muted-foreground flex gap-x-2.5">
                                 <AudioLines />
-                                {record.pitch}
+                                {parseFloat(record.pitch)}
                               </div>
                             </TooltipShell>
 
@@ -86,7 +86,7 @@ export function TrackContainer({records}: { records: RecordType[] }) {
                           <div className="mt-4 w-full flex justify-between">
 
                             <div>
-                              <Form>
+                              <Form preventScrollReset={true}>
                                 <input name="play" type="hidden" value={record.id}/>
                                 <Button type="submit" variant="outline" ><PlayIcon/> Listen</Button>
                               </Form>
@@ -106,9 +106,7 @@ export function TrackContainer({records}: { records: RecordType[] }) {
             ))}
           </div>
 
-
-          <Player />
-
+          <Player token={token} />
 
 
         </div>

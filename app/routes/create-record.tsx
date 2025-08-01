@@ -26,6 +26,7 @@ export async function action({request}: Route.ActionArgs) {
   const token = session.get("token") as string;
   const user_id = session.get("userId") as string;
 
+  // Save record
   const response = await fetch(`${endpoint}/records`, {
     headers: {
       'Content-Type': 'application/json',
@@ -43,10 +44,8 @@ export async function action({request}: Route.ActionArgs) {
     })
   })
 
-  const result = await response.json();
-  console.log(result)
-
   if (!response.ok) {
+    toast.error("Something went wrong when saving record")
     return redirect('/login');
   }
 
