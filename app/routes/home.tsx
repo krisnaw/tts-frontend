@@ -56,7 +56,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               <div className="pt-10">
                 <h5 className="text-2xl">Text-to-Speech Recorder</h5>
                 <p className="text-muted-foreground mt-2 font-light">
-                  Conversations with the most tragically misunderstood people of our time.
+                  A simple app to convert text-to-speech and record text for future use.
                 </p>
               </div>
               <div>
