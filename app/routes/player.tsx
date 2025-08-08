@@ -51,9 +51,9 @@ export default function Player({token} : {token: string}) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(data.content);
       utteranceRef.current = utterance;
-      utterance.pitch = 2;
-      utterance.rate = 1;
-      utterance.volume = 1;
+      utterance.pitch = data.pitch;
+      utterance.rate = data.rate;
+      utterance.volume = data.volume;
 
       for (const voice of synth.getVoices()) {
         if (voice.name === data.voice) {
